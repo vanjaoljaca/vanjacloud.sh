@@ -7,8 +7,7 @@ console.log('time test...')
 // import { ChatGPTAPI } from 'chatgpt'
 import keys from '../vanjacloudjs/keys.js'
 
-import MyModule from 'vanjacloudjs.shared';
-console.log(new MyModule().myThing)
+import vanjacloud from 'vanjacloudjs.shared';
 
 // async function test() {
 //     console.log(keys.openai)
