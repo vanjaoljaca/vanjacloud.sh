@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/vanjacloudsh.iml" filepath="$PROJECT_DIR$/.idea/vanjacloudsh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vanjacloud.sh.iml" filepath="$PROJECT_DIR$/.idea/vanjacloud.sh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vanjacloud.shared.js/.idea/vanjacloud.shared.js.iml" filepath="$PROJECT_DIR$/../vanjacloud.shared.js/.idea/vanjacloud.shared.js.iml" />
     </modules>
   </component>
 </project>
