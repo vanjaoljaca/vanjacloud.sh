@@ -1,6 +1,9 @@
 import OpenAI from 'openai';
 import { CompletionCreateParams } from "openai/resources/chat/completions";
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 // Initialize the OpenAI API with your API key
 const openai = new OpenAI({
     apiKey: process.env['OPENAI_API_KEY'],
