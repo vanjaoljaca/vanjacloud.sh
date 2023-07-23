@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5e7235d2-cc7a-4d4d-9a2f-501a12e3763b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.test.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.test.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/src/notion.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/index.test.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/index.test.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/dist/src/notion.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/src/index.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/src/index.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/src/notion.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/src/notion.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vanjacloud.shared.js/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../vanjacloud.shared.js/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2SbNYUP8CJDlw0dOSpRtKfQSYL4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/vanjaoljaca/work/vanjacloud/vanjacloud.sh",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "/Users/vanjaoljaca/work/vanjacloud/vanjacloud.sh/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e7235d2-cc7a-4d4d-9a2f-501a12e3763b" name="Changes" comment="" />
+      <created>1689411367594</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689411367594</updated>
+      <workItem from="1689411369074" duration="998000" />
+    </task>
+    <task id="LOCAL-00001" summary="Got module sharing working">
+      <option name="closed" value="true" />
+      <created>1689411738757</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689411738757</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Got module sharing working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got module sharing working" />
+  </component>
+</project>
