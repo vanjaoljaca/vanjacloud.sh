@@ -3,7 +3,7 @@ const opn = require('opn');
 const { google } = require('googleapis');
 
 const CLIENT_ID = '290430285327-un8po3uie98phhnv6l0f68jll25mnpko.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
+const CLIENT_SECRET = 'rotated out';
 const REDIRECT_URI = 'http://localhost:3000/oauth2callback';
 const SCOPES = [
   'https://www.googleapis.com/auth/youtube.readonly',
@@ -46,7 +46,7 @@ export async function getTokens() {
 }
 
 export async function getOauth2Client(tokens) {
-    const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-    oauth2Client.setCredentials(tokens);
-    return oauth2Client;
+  const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+  oauth2Client.setCredentials(tokens);
+  return oauth2Client;
 }
