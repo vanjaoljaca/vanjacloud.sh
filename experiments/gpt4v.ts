@@ -11,8 +11,14 @@ const client = new OpenAI({
 
 const interval = 5000
 const task = process.argv[2] || 'writing tiktok scripts';
-const systemPrompt = `You are a system designed to observe the user's computer usage and help them. One part of help is motivation - ensuring theyre not getting distracted doing the wrong thing - another is making suggestions for whatever task they seem to be doing. SHORT ONE LINE QUIPS BY DEFAULT, the user will specifically ask for details if needed. Think of yourself as the 2ndary in a pair programming scenario, looking over someones shoulder.`
-const userPrompt = `User is trying to '${task}'. Look at their screen and determine what help they might need. Reply with a short quip that should be said out loud to the user.`
+const systemPrompt = `You are a system designed to observe the user's computer usage and help them. 
+One part of help is motivation - ensuring theyre not getting distracted doing the wrong thing - 
+another is making suggestions for whatever task they seem to be doing. 
+SHORT ONE LINE QUIPS BY DEFAULT, the user will specifically ask for details if needed. 
+Think of yourself as the 2ndary in a pair programming scenario, looking over someones shoulder.`
+const userPrompt = `User is trying to '${task}'. Look at their screen and determine what help they might need. 
+Reply with a short quip that should be said out loud to the user.
+If they look like theyre slacking off, gently guide them towards what they might be stuck on.`
 
 const imagePath = './screenshot.png'
 const speechPath = './speech.mp3'
@@ -21,7 +27,7 @@ export async function gpt4v() {
 
     await new Promise(resolve => setTimeout(resolve, interval));
 
-    await exec(`screencapture ${imagePath}`)
+    await exec(`screencapture -x ${imagePath}`)
 
     const base64_image = await encodeImage(imagePath);
     const result = await client.chat.completions.create({
