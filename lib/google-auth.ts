@@ -1,9 +1,14 @@
+require('dotenv').config();
+
 const http = require('http');
 const opn = require('opn');
 const { google } = require('googleapis');
 
 const CLIENT_ID = '290430285327-un8po3uie98phhnv6l0f68jll25mnpko.apps.googleusercontent.com';
-const CLIENT_SECRET = 'rotated out';
+
+
+// https://console.cloud.google.com/apis/credentials/oauthclient/290430285327-un8po3uie98phhnv6l0f68jll25mnpko.apps.googleusercontent.com?project=vanjacloud
+const CLIENT_SECRET = process.env.GOOGLE_OAUTH; // Get CLIENT_SECRET from .env file
 const REDIRECT_URI = 'http://localhost:3000/oauth2callback';
 const SCOPES = [
   'https://www.googleapis.com/auth/youtube.readonly',
