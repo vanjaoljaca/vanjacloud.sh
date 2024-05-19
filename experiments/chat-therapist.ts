@@ -3,14 +3,15 @@ const config = {
         size: 300000
     },
     outputFolder: './output/gemini_pro',
-    sourceFolder: '/Users/vanjaoljaca/Desktop/inspection/testlog'
+    sourceFolder: '/Users/vanjaoljaca/Desktop/inspection/testlog',
+    initialContextFile: 'initial_context.md'
 }
 
 export async function main() {
     const model = createModel();
 
     const allMessages = readFacebookMessages(config.sourceFolder);
-    const initialContext = fs.readFileSync(path.join(config.sourceFolder, 'initial_context.md'), 'utf-8');
+    const initialContext = fs.readFileSync(path.join(config.sourceFolder, config.initialContextFile), 'utf-8');
 
     const partitions = await createPartitions(allMessages,
         async (t: string) => t.length * 2, //(await model.countTokens(t)).totalTokens,
@@ -277,93 +278,73 @@ function readFacebookMessages(sourceFolder) {
 }
 
 const prompts = {
-
-
     rollupPrompt: (context: string, subprompt: string) => `
-    Roleplay a therapist to analyze & comment on the interpersonal relationship dynamics in this chat log.
-    Add quotes & explanations where necessary.
-    Always try and quotelink to examples.
-    Be aware that person A or person B may be a malicious / untrustworthy actor, in which case we have to give commentary and advice accounting for all possible scenarios(2x malicious, malicious & trustworthy, trustworthy & malicious, 2x trustworthy))
-    Make sure to add a subheader that explains which date _RANGE_ was analyzed(first message date, last message date).
-    Output should always be markdown formatted.
-    Any feedback or advice should be given in a way that is actionable and clear, with accredited quotation including how it could have been phrased differently with example.
-    Take note of any large gaps between message blocks(over a few months) and be aware that it means there was a disruption in the relationship.
+    As a therapist, analyze and comment on the interpersonal relationship dynamics in this chat log.
+    Include relevant quotes and explanations, and always link to examples.
+    Be aware that either Person A or Person B may be a malicious or untrustworthy actor. Provide commentary and advice accounting for all possible scenarios (both malicious, one malicious and one trustworthy, both trustworthy).
+    Add a subheader with the date range analyzed (first message date, last message date).
+    Output should be in markdown format.
+    Give actionable and clear feedback with accredited quotations, including how things could have been phrased differently with examples.
+    Note any large gaps between message blocks (over a few months) indicating a disruption in the relationship.
+    Pay attention to emotional tones, conflict escalation, resolution attempts, and significant turning points in the conversation.
     -----
-            ${context}
-        -----
-    in this section I want you to focus on: ${subprompt}
-        `,
+    ${context}
+    -----
+    Focus on: ${subprompt}
+    `,
 
     subprompts: [
-        `comment on trust in the relationship and how it is progressing, and any discussions of it or conversational etiquete. 
-        also comment as a therapist on who is acting in good faith(and who might not be), which things are breaking good faith and trust.with quotes.talk about progression over time and any conversational etiquete progression.
-            specifically, i am interested in when trust builds or is broken(root cause analysis) so that periods of high / medium / low / no trust can be identified as a progression
-        and that direct quotes can be made of what breaks / builds trust for learning purposes
-            `,
+        `Comment on the progression of trust in the relationship. Discuss any conversations on trust or conversational etiquette. Identify who is acting in good faith and who might not be, providing quotes. Analyze the progression of trust over time, identifying high, medium, low, or no trust periods, with direct quotes illustrating what builds or breaks trust.`,
 
-        `collect a running tally on values & beliefs for each person.look for clashes and conflicts.also focus on contentious political scissor beliefs(eg trump, feminism, etc) and highlight stated beliefs, tracking as they change,
-            but also evaluate what you think their actual beliefs are and if theyr ebeing honest.use this to think about impact on trust in the debates and discussions`,
+        `Collect a running tally of values and beliefs for each person. Highlight clashes and conflicts, especially contentious political beliefs (e.g., Trump, feminism). Track stated beliefs, note changes, and evaluate honesty. Analyze the impact on trust in debates and discussions.`,
 
+        `Provide a summary of what happened in this block, focusing on key events and dynamics.`,
 
-        `the summary page of what happened in this block`,
-        `the high level overview of all arguments, with therapist, debate judge, and objective ruling of content based on wikipedia- esque facts`,
-        `play by play overview of arguments, highlighting the root cause of where they broke down and why`,
-        `interpersonal dynamics, power, grwoth, change`,
-        `analysis of likeliness of good faith vs bad faith and how to tell,`,
-        `tips for each person and feedback`,
-        `conversational etiquette tips`,
+        `Offer a high-level overview of all arguments, with an analysis from a therapist's perspective. Include a debate judge's ruling and objective assessment based on factual content.`,
 
+        `Give a play-by-play overview of arguments, highlighting the root causes of breakdowns and reasons for conflicts.`,
 
+        `Analyze interpersonal dynamics, including power struggles, growth, and change over time.`,
+
+        `Assess the likelihood of good faith vs. bad faith actions and how to differentiate between them.`,
+
+        `Provide personalized tips and feedback for each person involved, focusing on improving communication and resolving conflicts.`,
+
+        `Suggest conversational etiquette improvements to enhance the quality of interactions and reduce misunderstandings.`,
     ],
 
-    generateContextSubprompt: `generate a context subprompt for the next session, including things to follow up and track on to follow up growth and change in dynamic`,
+    generateContextSubprompt: `Generate a context subprompt for the next session, including follow-up items to track growth and changes in dynamics. Focus on unresolved issues, recurring themes, and potential areas of improvement.`,
 
-    verificationPrompt: `verify that the above is correct, paying special attention to make sure qoutes and attitudes are attributed to the correct person.make sure that power dynamics are not expressed backwards.
-when finding errors, explain the errors in a DIFF format, i dont want a full rewrite.reference where the errors are exactly and what was wrong`,
-    generateContextNextPrompt: (allPartitionSummaries, verificationResult) => {
-        return `${prompts.generateContextSubprompt}
+    verificationPrompt: `Verify that the above analysis is correct, ensuring quotes and attitudes are accurately attributed. Make sure power dynamics are correctly represented. Identify and explain errors in a DIFF format, referencing where the errors are exactly and what was wrong.`,
 
-    Make sure to summarize anything relevant and output it so i can pass it back to you next session.
-    The emphasis here is describing what has happened, and some of what to look for.Provide yourself context clues, dont just flood it with more instructions
-    on what to look for in future.
-    Also, all these chat logs have already happened, so you will not be able to give feedback directly to the people involved in the chat log.
-    Below are all the notes you gave me so far.
+    generateContextNextPrompt: (allPartitionSummaries, verificationResult) => `
+    ${prompts.generateContextSubprompt}
+
+    Summarize anything relevant for the next session. Describe what has happened and provide context clues without overloading with instructions.
+    Note that all these chat logs have already happened, so you cannot give direct feedback to the people involved.
+    Below are all the notes so far.
     ----
     ${allPartitionSummaries}
-----------------
-    verification result: (apply this as a diff on above to fix errors)
-
+    ----
+    Verification result: (apply this as a diff to fix errors)
     ${verificationResult}
-`},
-    generateFinalSummaryRequest: (initialContext, allSummaries) => {
-        return `Now create a final report of all the following summaries from therapist report.
-Take note of the time stamps and create a comprehensive full report of everything involved.
-Make sure to structure it in a way that is easy to read and understand, and consume in a relatively enjoyable way.
- 
-I would expect you to also generate commentary about overarching themes and progress across time, that is key for this final step.
-    I'm expecting to see commentary on the relationship dynamics over the whole narrative arc first, and then dive into individual areas of interest in the relationship in separate sections.
+    `,
 
-I would also expect it to wrap up the report in some reasonable way
-
----
-----
-    initialContext: ${initialContext}
-----
+    generateFinalSummaryRequest: (initialContext, allSummaries) => `
+    Create a final report from the following therapist summaries.
+    Note the timestamps and create a comprehensive, structured, and engaging report.
+    Provide commentary on overarching themes and progress over time.
+    Start with relationship dynamics over the whole narrative arc, then dive into individual areas of interest in separate sections.
+    Wrap up the report in a meaningful way.
+    ----
+    Initial Context: ${initialContext}
+    ----
     The following summaries were generated with these prompts:
-
-Roleplay a therapist to analyze & comment on the interpersonal relationship dynamics in this chat log.
-Add quotes & explanations where necessary.
-Always try and quotelink to examples.
-Be aware that person A or person B may be a malicious / untrustworthy actor, in which case we have to give commentary and advice accounting for all possible scenarios(2x malicious, malicious & trustworthy, trustworthy & malicious, 2x trustworthy))
-Make sure to add a subheader that explains which date range was analyzed.
-
-- ${prompts.subprompts.join('\n- ')}
-- ${prompts.verificationPrompt}
-
-----------------
+    - ${prompts.subprompts.join('\n- ')}
+    - ${prompts.verificationPrompt}
+    ----
     ${allSummaries.join('\n\n')}
-`
-    }
+    `
 }
 
 function customPartitionCleanUp(i, partitionText) {
