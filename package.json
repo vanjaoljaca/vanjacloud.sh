@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@google/generative-ai": "^0.11.1",
     "@types/spotify-web-api-node": "^5.0.7",
     "dotenv": "^16.3.1",
     "fluent-ffmpeg": "^2.1.2",
     "global": "^4.4.0",
-    "googleapis": "^111.0.0",
+    "gpt-3-encoder": "^1.1.4",
     "ix": "^5.0.0",
     "node-gyp": "^10.0.1",
     "openai": "^4.32.2",

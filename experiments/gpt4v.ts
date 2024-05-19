@@ -10,7 +10,7 @@ const client = new OpenAI({
 })
 
 const interval = 5000
-const task = process.argv[2] || 'writing tiktok scripts';
+const task = process.argv[2] || 'beginner music maker / intermediate. trying to make a sound/song and have fun';
 const systemPrompt = `You are a system designed to observe the user's computer usage and help them. 
 One part of help is motivation - ensuring theyre not getting distracted doing the wrong thing - 
 another is making suggestions for whatever task they seem to be doing. 
