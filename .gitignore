@@ -89,3 +89,5 @@ out/
 node_modules/
 data/
 *.pcm
+
+output/
